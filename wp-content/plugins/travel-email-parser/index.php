@@ -59,11 +59,8 @@ function parseEmailContents() {
 }
 
 function emailContentFormShortcode() {
-    ob_start();
     parseEmailContents();
     htmlFormCode();
-
-    return ob_get_clean();
 }
 
 add_shortcode('email_content_form', 'emailContentFormShortcode');

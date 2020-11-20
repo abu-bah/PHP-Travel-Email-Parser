@@ -25,7 +25,7 @@ function htmlFormCode() {
 
 function parseEmailContents() {
 
-    // if the submit button is clicked, send the email
+    // if the submit button is clicked, parse the email
     if (isset($_POST['form-submitted'])) {
 
         if (isset($_FILES['email-file']) && $_FILES['email-file']['tmp_name']) {
@@ -33,17 +33,14 @@ function parseEmailContents() {
             $parts = explode('.', $_FILES['email-file']['name']);
             $extension = end($parts);
 
+            // extension validation
             if ($extension !== 'eml') {
                 echo '<p style="color: red;">Invalid file format. File must be in .eml format.</p>';
             } else {
                 $emailContents = file_get_contents($file);
                 $message = Message::from($emailContents);
-                $subject = $message->getHeaderValue('Subject');
-                $text = $message->getTextContent();
                 $html = strip_tags($message->getHtmlContent());
                 $from = $message->getHeader('From');
-                $fromName = $from->getName();
-                $fromEmail = $from->getEmail();
 
                 $airline = str_replace('From: ', '', $from);
                 $passengerName = str_replace('!', '', substr($html, strpos($html, 'Hello ') + 6, strpos($html, 'Issued:') - (strpos($html, 'Hello ') + 6)));

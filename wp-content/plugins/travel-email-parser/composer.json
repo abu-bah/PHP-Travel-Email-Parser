@@ -1,0 +1,13 @@
+{
+  "name": "php-travel-email-parser",
+  "description": "A simple PHP Travel Email Parser",
+  "authors": [
+    {
+      "name": "Abu Bah",
+      "email": "bbah95@gmail.com"
+    }
+  ],
+  "require": {
+    "zbateson/mail-mime-parser": "^1.3"
+  }
+}
